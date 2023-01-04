@@ -1,0 +1,33 @@
+https://stackoverflow.com/questions/27934238/rendering-raw-html-with-reactjs
+
+untested 
+// react render method:I have used this in quick and dirty situations:
+
+render() {
+    return (
+      <div>
+        { this.props.textOrHtml.indexOf('</') !== -1
+            ? (
+                <div dangerouslySetInnerHTML={{__html: this.props.textOrHtml.replace(/(<? *script)/gi, 'illegalscript')}} >
+                </div>
+              )
+            : this.props.textOrHtml
+          }
+
+      </div>
+      )
+  }
+
+
+
+#######################################
+
+
+import React, { Component } from 'react';    
+import Parser from 'html-react-parser';
+
+class MyComponent extends Component {
+  render() {
+    <div>{Parser(this.state.message)}</div>
+  }
+};
